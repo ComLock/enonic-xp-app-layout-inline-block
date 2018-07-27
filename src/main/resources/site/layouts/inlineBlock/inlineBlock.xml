@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<layout>
+	<display-name>Inline-block layout</display-name>
+	<config>
+		<item-set name="regions">
+			<label>Region</label>
+			<occurrences minimum="1" maximum="12"/><!-- maximum should be same as number of regions -->
+			<items>
+				<input name="elementTag" type="TextLine">
+					<label>Element tag</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default>div</default>
+				</input>
+				<input name="height" type="TextLine">
+					<label>Height</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+				<input name="textAlign" type="TextLine">
+					<label>Text align</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+				<input name="verticalAlign" type="TextLine">
+					<label>Vertical align</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+				<input name="width" type="TextLine">
+					<label>Width</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+				<item-set name="mediaQueries">
+					<label>Media query</label>
+					<occurrences minimum="0" maximum="0"/>
+					<items>
+						<input name="mediaQueryMinWidth" type="TextLine">
+							<label>Media query minimum width</label>
+							<occurrences minimum="0" maximum="1"/>
+						</input>
+						<input name="height" type="TextLine">
+							<label>Region height</label>
+							<occurrences minimum="0" maximum="1"/>
+							<default></default>
+						</input>
+						<input name="textAlign" type="TextLine">
+							<label>Region text-align</label>
+							<occurrences minimum="0" maximum="1"/>
+							<default></default>
+						</input>
+						<input name="verticalAlign" type="TextLine">
+							<label>Region vertical-align</label>
+							<occurrences minimum="0" maximum="1"/>
+							<default></default>
+						</input>
+						<input name="width" type="TextLine">
+							<label>Region width</label>
+							<occurrences minimum="0" maximum="1"/>
+							<default></default>
+						</input>
+					</items>
+				</item-set>
+			</items>
+		</item-set>
+	</config>
+	<regions>
+		<region name="inlineBlock1"/>
+		<region name="inlineBlock2"/>
+		<region name="inlineBlock3"/>
+		<region name="inlineBlock4"/>
+		<region name="inlineBlock5"/>
+		<region name="inlineBlock6"/>
+		<region name="inlineBlock7"/>
+		<region name="inlineBlock8"/>
+		<region name="inlineBlock9"/>
+		<region name="inlineBlock10"/>
+		<region name="inlineBlock11"/>
+		<region name="inlineBlock12"/>
+		<!-- Just add more if needed -->
+	</regions>
+</layout>
