@@ -3,7 +3,15 @@
 	<display-name>Inline-block Grid layout</display-name>
 	<config>
 
-        <field-set name="gridFieldSet">
+        <!--input name="gridName" type="CustomSelector">
+          <label>Grid</label>
+          <occurrences minimum="1" maximum="1"/>
+          <config>
+            <service>gridSelector</service>
+          </config>
+        </input-->
+
+        <!--field-set name="gridFieldSet">
             <label>Grid configuration</label>
             <items>
                 <input name="containerTag" type="TextLine">
@@ -21,13 +29,6 @@
                     <occurrences minimum="0" maximum="1"/>
                     <default></default>
                 </input>
-
-                <!--input name="containerWidth" type="Long">
-					<label>Container width</label>
-					<help-text></help-text>
-					<occurrences minimum="0" maximum="1"/>
-					<default></default>
-				</input-->
                 <input name="columnsTotal" type="Long">
 					<label>Columns</label>
 					<occurrences minimum="0" maximum="1"/>
@@ -38,7 +39,6 @@
 					<occurrences minimum="0" maximum="1"/>
 					<default>0</default>
 				</input>
-
                 <item-set name="breakpoints">
 					<label>Breakpoint</label>
 					<occurrences minimum="0" maximum="0"/>
@@ -54,18 +54,6 @@
                             <occurrences minimum="0" maximum="1"/>
                             <default></default>
                         </input>
-
-                        <!--input name="marginLeft" type="Long">
-        					<label>Container margin left</label>
-        					<occurrences minimum="0" maximum="1"/>
-        					<default>auto</default>
-        				</input>
-                        <input name="marginRight" type="Long">
-                            <label>Container margin right</label>
-                            <occurrences minimum="0" maximum="1"/>
-                            <default>auto</default>
-                        </input-->
-
                         <input name="columnsTotal" type="Long">
         					<label>Columns</label>
                             <help-text>Leave empty to inherit from "top".</help-text>
@@ -79,9 +67,9 @@
         					<default></default>
         				</input>
                     </items>
-                </item-set><!-- gridConfig.mediaQueries -->
+                </item-set>
             </items>
-        </field-set>
+        </field-set-->
 
         <field-set name="regionsFieldSet">
             <label>Regions</label>
@@ -90,11 +78,18 @@
         			<label>Region</label>
         			<occurrences minimum="1" maximum="12"/><!-- maximum should be same as number of regions -->
         			<items>
-        				<input name="columns" type="Long">
-        					<label>Columns</label>
-        					<occurrences minimum="0" maximum="1"/>
-        					<default></default>
-        				</input>
+                        <!--input name="columns" type="CustomSelector">
+                            <label>Columns</label>
+                            <occurrences minimum="1" maximum="1"/>
+                            <config>
+                                <service>columnsSelector</service>
+                            </config>
+                        </input-->
+                        <input name="columns" type="Long">
+                            <label>Columns</label>
+                            <occurrences minimum="1" maximum="1"/>
+                            <default></default>
+                        </input>
                         <input name="offset" type="Long">
                             <label>Offset columns</label>
                             <occurrences minimum="0" maximum="1"/>
@@ -124,15 +119,29 @@
         					<label>Media query</label>
         					<occurrences minimum="0" maximum="0"/>
         					<items>
+                                <input name="breakpoint" type="CustomSelector">
+                                    <label>Breakpoint</label>
+                                    <occurrences minimum="1" maximum="1"/>
+                                    <config>
+                                        <service>breakpointSelector</service>
+                                    </config>
+                                </input>
         						<input name="mediaQueryMinWidth" type="Long">
         							<label>Media query minimum width(make sure to use same as in grid configuration)</label>
         							<occurrences minimum="0" maximum="1"/>
         						</input>
-        						<input name="columns" type="Long">
-        							<label>Columns</label>
-        							<occurrences minimum="0" maximum="1"/>
-        							<default></default>
-        						</input>
+                                <!--input name="columns" type="CustomSelector">
+                                    <label>Columns</label>
+                                    <occurrences minimum="1" maximum="1"/>
+                                    <config>
+                                        <service>columnsSelector</service>
+                                    </config>
+                                </input-->
+                                <input name="columns" type="Long">
+                                    <label>Columns</label>
+                                    <occurrences minimum="1" maximum="1"/>
+                                    <default></default>
+                                </input>
                                 <input name="offset" type="Long">
                                     <label>Offset columns</label>
                                     <occurrences minimum="0" maximum="1"/>

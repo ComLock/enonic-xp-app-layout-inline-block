@@ -1,3 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
+	<config>
+		<input name="marginLeft" type="Long">
+			<label>Container margin left</label>
+			<occurrences minimum="0" maximum="1"/>
+			<default></default>
+		</input>
+		<input name="marginRight" type="Long">
+			<label>Container margin right</label>
+			<occurrences minimum="0" maximum="1"/>
+			<default></default>
+		</input>
+		<input name="columns" type="Long">
+			<label>Columns</label>
+			<occurrences minimum="0" maximum="1"/>
+			<config>
+				<min>1</min>
+			</config>
+			<default>12</default>
+		</input>
+		<input name="gutterWidth" type="Long">
+			<label>Gutter width</label>
+			<occurrences minimum="0" maximum="1"/>
+			<default></default>
+		</input>
+		<item-set name="breakpoints">
+			<label>Breakpoint</label>
+			<occurrences minimum="0" maximum="0"/>
+			<items>
+				<input name="name" type="TextLine">
+					<label>Breakpoint name</label>
+					<occurrences minimum="1" maximum="1"/>
+					<default></default>
+				</input>
+				<input name="breakpointMinWidth" type="Long">
+					<label>Breakpoint minimum width</label>
+					<occurrences minimum="1" maximum="1"/>
+					<config>
+						<min>1</min>
+					</config>
+				</input>
+
+				<option-set name="container">
+					<label>Container</label>
+					<expanded>false</expanded>
+					<occurrences minimum="1" maximum="1"/>
+					<options minimum="1" maximum="1">
+						<option name="static">
+							<default>true</default>
+							<label>Static</label>
+							<items>
+								<input name="width" type="Long">
+									<label>Container width</label>
+									<help-text>Leave empty for fluid</help-text>
+									<occurrences minimum="0" maximum="1"/>
+									<config>
+										<min>1</min>
+									</config>
+									<default></default>
+								</input>
+							</items>
+						</option>
+						<option name="fluid">
+							<label>Fluid</label>
+							<items>
+								<input name="marginLeft" type="Long">
+									<label>Container margin left</label>
+									<occurrences minimum="0" maximum="1"/>
+									<default></default>
+								</input>
+								<input name="marginRight" type="Long">
+									<label>Container margin right</label>
+									<occurrences minimum="0" maximum="1"/>
+									<default></default>
+								</input>
+							</items>
+						</option>
+					</options>
+				</option-set>
+				<input name="gutterWidth" type="Long">
+					<label>Gutter width</label>
+					<help-text>Leave empty to inherit from "top".</help-text>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+			</items>
+		</item-set>
+	</config>
 </site>
