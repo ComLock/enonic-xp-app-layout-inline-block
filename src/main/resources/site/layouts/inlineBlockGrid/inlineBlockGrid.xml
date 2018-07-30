@@ -96,7 +96,7 @@
         					<default></default>
         				</input>
                         <input name="offset" type="Long">
-                            <label>Offset</label>
+                            <label>Offset columns</label>
                             <occurrences minimum="0" maximum="1"/>
                             <default></default>
                         </input>
@@ -134,7 +134,7 @@
         							<default></default>
         						</input>
                                 <input name="offset" type="Long">
-                                    <label>Offset</label>
+                                    <label>Offset columns</label>
                                     <occurrences minimum="0" maximum="1"/>
                                     <default></default>
                                 </input>

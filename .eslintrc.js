@@ -62,6 +62,7 @@ module.exports = {
                 allowAfterSuper: false,
                 enforceInMethodNames: false,
             }],
+            'object-curly-newline': ['off'],
             'object-curly-spacing': ['off'],
             'spaced-comment': ['off']
         } // rules

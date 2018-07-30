@@ -5,6 +5,31 @@ import {forceArray} from '/lib/enonic/util/data';
 import {getComponent} from '/lib/xp/portal';
 
 
+function fnOneColumnWidth({containerWidth, gutterWidth, divisions}) {
+    return (
+        containerWidth
+        - (gutterWidth
+            * (divisions - 1)
+        )
+    ) / divisions;
+}
+
+
+function fnRegionWidthInPercent({
+    columns = 1,
+    divisions = 12,
+    containerWidth = 1,
+    gutterWidth = 0
+} = {}) {
+    const oneColumnWidth = fnOneColumnWidth({containerWidth, gutterWidth, divisions});
+    const widthOfColumnsNotCountingGutters = oneColumnWidth * columns;
+    const guttersInsideCell = (columns - 1) * gutterWidth;
+    const regionWidth = widthOfColumnsNotCountingGutters + guttersInsideCell;
+    const regionWidthInPercent = `${regionWidth / containerWidth * 100}%`;
+    return regionWidthInPercent;
+}
+
+
 export function get(req) {
     const {config, regions} = getComponent(); //log.info(toStr({config, regions}));
     const list = forceArray(config.regions); //log.info(toStr({list}));
@@ -25,6 +50,7 @@ export function get(req) {
             };
             breakpointsHash[breakpointMinWidth] = {
                 columnsTotal: breakpoint.columnsTotal || columnsTotal,
+                containerWidth,
                 gutterWidth: breakpoint.gutterWidth || gutterWidth
             };
         });
@@ -33,13 +59,16 @@ export function get(req) {
     const {
         /*containerWidth, */marginLeft, marginRight
     } = config || {};
+    const widthOfVerticalScrollbar = '100vw - 100%';
+    const containerWidth = `100vw - (${widthOfVerticalScrollbar}) - ${marginLeft + marginRight}px`; // Must be calculated
     const r = render(
         element(config.containerTag || 'div', {
             _s: {
+                boxSizing: 'border-box',
                 fontFamily: 'zero-width',
                 marginLeft: `${marginLeft}px`,
-                marginRight: `${marginRight}px`/*,
-                width: containerWidth*/
+                marginRight: `${marginRight}px`,
+                width: `calc(${containerWidth})`
             },
             _m: containerMedia
         }, list.map((item, i) => {
@@ -57,34 +86,62 @@ export function get(req) {
                 const mediaQueryColumnsTotal = breakpointsHash[mediaQueryMinWidth].columnsTotal;
                 const mediaQueryGutterWidth = mediaQuery.gutterWidth || breakpointsHash[mediaQueryMinWidth].gutterWidth;
                 const {
-                    height, textAlign, verticalAlign
+                    height, offset, textAlign, verticalAlign
                 } = mediaQuery; //log.info(toStr({height, textAlign, verticalAlign}));
                 media[`minWidth${mediaQueryMinWidth}`] = {
                     height,
+                    marginLeft: offset
+                        ? (fnOneColumnWidth({
+                            containerWidth: breakpointsHash[mediaQueryMinWidth].containerWidth,
+                            gutterWidth: mediaQueryGutterWidth,
+                            divisions: mediaQueryColumnsTotal
+                        }) + mediaQueryGutterWidth) * offset
+                        : '0',
                     marginRight: i === (list.length - 1) ? null : `${mediaQueryGutterWidth}px`,
                     textAlign,
                     verticalAlign,
-                    //width: `calc((${mediaQueryMinWidth - (mediaQueryGutterWidth * (columnsTotal - 1))}px) * ${mediaQueryColumns / mediaQueryColumnsTotal})`
-                    width: `${
-                        (mediaQueryMinWidth
-                        - (mediaQueryGutterWidth * (columnsTotal - 1)) // gutters
-                        ) * mediaQueryColumns / mediaQueryColumnsTotal
-                    }px`
+                    width: fnRegionWidthInPercent({
+                        columns: mediaQueryColumns,
+                        divisions: mediaQueryColumnsTotal,
+                        containerWidth: breakpointsHash[mediaQueryMinWidth].containerWidth,
+                        gutterWidth: mediaQueryGutterWidth
+                    })
                 };
             });
             const {
-                height, textAlign, verticalAlign
+                height, offset, textAlign, verticalAlign
             } = item;
+
+            // Width
+            const allGutters =  `${gutterWidth * (columnsTotal - 1)}px`; // Static
+            const oneColumnWidth = `(100% - ${allGutters}) / ${columnsTotal}`;
+            const guttersInsideRegion = `${gutterWidth * (columns - 1)}px`; // Static
+            const regionWidth = `(${oneColumnWidth} * ${columns}) + ${guttersInsideRegion}`;
+
+            // Offset
+            const oneColumnAndGutter = `(${oneColumnWidth}) + ${gutterWidth}px`;
+            const regionOffset = `(${oneColumnAndGutter}) * ${offset}`;
+
             return element(item.elementTag || 'div', {
                 dataPortalRegion: req.mode === 'edit' ? name : null,
                 _s: {
+                    boxSizing: 'border-box',
                     display: 'inline-block',
                     fontFamily: 'initial',
                     height,
+                    marginLeft: offset ? `calc(${regionOffset})` : null,
                     marginRight: i === (list.length - 1) ? null : `${gutterWidth}px`,
+
+                    /*
+                     The vw unit doesn't take the overflow-y scrollbar into account when overflow-y is set to auto.
+                     Change it to overflow-y: scroll; and the vw unit will be the viewport without the scrollbar.
+                     Only downside to take into account. If the content fits into the screen, the scrollbar is shown anyway.
+                     Possible solution is to change from auto to scroll in javascript.
+                    //overflowY: 'scroll',*/
+
                     textAlign,
                     verticalAlign,
-                    width: `calc((100vw - ${marginLeft + marginRight + (gutterWidth * (columnsTotal - 1))}px) * ${columns / columnsTotal})`
+                    width: `calc(${regionWidth})`
                 },
                 _m: media
             }, (components && components.length)
