@@ -138,6 +138,16 @@
                                     <occurrences minimum="0" maximum="1"/>
                                     <default></default>
                                 </input>
+                                <input name="push" type="Long">
+                                    <label>Push columns</label>
+                                    <occurrences minimum="0" maximum="1"/>
+                                    <default></default>
+                                </input>
+                                <input name="pull" type="Long">
+                                    <label>Pull columns</label>
+                                    <occurrences minimum="0" maximum="1"/>
+                                    <default></default>
+                                </input>
         						<input name="height" type="TextLine">
         							<label>Region height</label>
         							<occurrences minimum="0" maximum="1"/>
