@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<layout>
+	<display-name>Inline-block Grid layout</display-name>
+	<config>
+
+        <field-set name="gridFieldSet">
+            <label>Grid configuration</label>
+            <items>
+                <input name="containerTag" type="TextLine">
+					<label>Container tag</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default>div</default>
+				</input>
+                <input name="marginLeft" type="Long">
+					<label>Container margin left</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input>
+                <input name="marginRight" type="Long">
+                    <label>Container margin right</label>
+                    <occurrences minimum="0" maximum="1"/>
+                    <default></default>
+                </input>
+
+                <!--input name="containerWidth" type="Long">
+					<label>Container width</label>
+					<help-text></help-text>
+					<occurrences minimum="0" maximum="1"/>
+					<default></default>
+				</input-->
+                <input name="columnsTotal" type="Long">
+					<label>Columns</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default>12</default>
+				</input>
+                <input name="gutterWidth" type="Long">
+					<label>Gutter width</label>
+					<occurrences minimum="0" maximum="1"/>
+					<default>0</default>
+				</input>
+
+                <item-set name="breakpoints">
+					<label>Breakpoint</label>
+					<occurrences minimum="0" maximum="0"/>
+					<items>
+						<input name="breakpointMinWidth" type="Long">
+							<label>Breakpoint minimum width</label>
+							<occurrences minimum="0" maximum="1"/>
+						</input>
+
+                        <input name="containerWidth" type="Long">
+                            <label>Container width</label>
+                            <help-text></help-text>
+                            <occurrences minimum="0" maximum="1"/>
+                            <default></default>
+                        </input>
+
+                        <!--input name="marginLeft" type="Long">
+        					<label>Container margin left</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default>auto</default>
+        				</input>
+                        <input name="marginRight" type="Long">
+                            <label>Container margin right</label>
+                            <occurrences minimum="0" maximum="1"/>
+                            <default>auto</default>
+                        </input-->
+
+                        <input name="columnsTotal" type="Long">
+        					<label>Columns</label>
+                            <help-text>Leave empty to inherit from "top".</help-text>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+                        <input name="gutterWidth" type="Long">
+        					<label>Gutter width</label>
+                            <help-text>Leave empty to inherit from "top".</help-text>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+                    </items>
+                </item-set><!-- gridConfig.mediaQueries -->
+            </items>
+        </field-set>
+
+        <field-set name="regionsFieldSet">
+            <label>Regions</label>
+            <items>
+                <item-set name="regions">
+        			<label>Region</label>
+        			<occurrences minimum="1" maximum="12"/><!-- maximum should be same as number of regions -->
+        			<items>
+        				<input name="columns" type="Long">
+        					<label>Columns</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+                        <input name="offset" type="Long">
+                            <label>Offset</label>
+                            <occurrences minimum="0" maximum="1"/>
+                            <default></default>
+                        </input>
+        				<input name="regionTag" type="TextLine">
+        					<label>Region tag</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default>div</default>
+        				</input>
+        				<input name="height" type="TextLine">
+        					<label>Height</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+        				<input name="textAlign" type="TextLine">
+        					<label>Text align</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+        				<input name="verticalAlign" type="TextLine">
+        					<label>Vertical align</label>
+        					<occurrences minimum="0" maximum="1"/>
+        					<default></default>
+        				</input>
+        				<item-set name="mediaQueries">
+        					<label>Media query</label>
+        					<occurrences minimum="0" maximum="0"/>
+        					<items>
+        						<input name="mediaQueryMinWidth" type="Long">
+        							<label>Media query minimum width(make sure to use same as in grid configuration)</label>
+        							<occurrences minimum="0" maximum="1"/>
+        						</input>
+        						<input name="columns" type="Long">
+        							<label>Columns</label>
+        							<occurrences minimum="0" maximum="1"/>
+        							<default></default>
+        						</input>
+                                <input name="offset" type="Long">
+                                    <label>Offset</label>
+                                    <occurrences minimum="0" maximum="1"/>
+                                    <default></default>
+                                </input>
+        						<input name="height" type="TextLine">
+        							<label>Region height</label>
+        							<occurrences minimum="0" maximum="1"/>
+        							<default></default>
+        						</input>
+        						<input name="textAlign" type="TextLine">
+        							<label>Region text-align</label>
+        							<occurrences minimum="0" maximum="1"/>
+        							<default></default>
+        						</input>
+        						<input name="verticalAlign" type="TextLine">
+        							<label>Region vertical-align</label>
+        							<occurrences minimum="0" maximum="1"/>
+        							<default></default>
+        						</input>
+        					</items>
+        				</item-set>
+        			</items>
+        		</item-set>
+            </items>
+        </field-set>
+	</config>
+	<regions>
+		<region name="inlineBlockGrid1"/>
+		<region name="inlineBlockGrid2"/>
+		<region name="inlineBlockGrid3"/>
+		<region name="inlineBlockGrid4"/>
+		<region name="inlineBlockGrid5"/>
+		<region name="inlineBlockGrid6"/>
+		<region name="inlineBlockGrid7"/>
+		<region name="inlineBlockGrid8"/>
+		<region name="inlineBlockGrid9"/>
+		<region name="inlineBlockGrid10"/>
+		<region name="inlineBlockGrid11"/>
+		<region name="inlineBlockGrid12"/>
+		<!-- Just add more if needed -->
+	</regions>
+</layout>
